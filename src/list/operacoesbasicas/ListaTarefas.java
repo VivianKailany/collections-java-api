@@ -1,7 +1,8 @@
-package list.operacoesbasicas;
+package list.OperacoesBasicas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListaTarefas {
 
@@ -36,12 +37,47 @@ public class ListaTarefas {
     public static void main(String[] args) {
         ListaTarefas listaTarefas = new ListaTarefas();
 
-        listaTarefas.adicionarTarefa("Comer arroz");
-        listaTarefas.adicionarTarefa("Comer feijao");
-        System.out.println(listaTarefas.obterNumeroTotalTarefas());
-        listaTarefas.obterDescricoesTarefas();
-        
+        Scanner scanner = new Scanner(System.in);
+        String comandoTarefa;
 
+        while (true) {
+            System.out.println("Esse é Lista de Tarefa");
+            System.out.println("Escolha uma opção: [adicionar, remover, listar, total, sair]");
+            System.out.print("> ");
+            comandoTarefa = scanner.nextLine().trim().toLowerCase();
+
+            switch (comandoTarefa) {
+                case "adicionar":
+                    System.out.println("Digite a descrição da tarefa:");
+                    System.out.print("> ");
+                    String descricaoAdicionar = scanner.nextLine();
+                    listaTarefas.adicionarTarefa(descricaoAdicionar);
+                    System.out.println("Tarefa adicionada: " + descricaoAdicionar);
+                    break;
+                case "remover":
+                    System.out.println("Digite a descrição da tarefa a ser removida:");
+                    System.out.print("> ");
+                    String descricaoRemover = scanner.nextLine();
+                    listaTarefas.removerTarefa(descricaoRemover);
+                    System.out.println("Tarefa removida: " + descricaoRemover);
+                    break;
+                case "listar":
+                    System.out.println("Tarefas na lista:");
+                    listaTarefas.obterDescricoesTarefas();
+                    break;
+                case "total":
+                    System.out.println("Número total de tarefas: " + listaTarefas.obterNumeroTotalTarefas());
+                    break;
+                case "sair":
+                    System.out.println("Saindo...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Comando não reconhecido.");
+                    break;
+            }
+        }
     }
-
+        
 }
+
